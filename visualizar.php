@@ -1,3 +1,7 @@
+<?php
+require_once "src/funcao-alunos.php";
+$lista_alunos = lerAlunos($conexao);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,6 +21,32 @@ para exibir a relação de alunos existentes no banco de dados.
 
 Obs.: não se esqueça de criar também os links dinâmicos para
 as páginas de atualização e exclusão. -->
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Nota 1</th>
+                <th>Nota 2</th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+        <?php foreach($lista_alunos as $alunos){?>
+            <tr>
+                <td><?=$alunos["nome"]?></td>                
+                <td><?=$alunos["nota_um"]?></td>                
+                <td><?=$alunos["nota_dois"]?></td> 
+                
+                <!-- LINK DINAMICO -->
+
+                <td><a href=""></a></td>
+                
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
 
 
     <p><a href="index.php">Voltar ao início</a></p>
