@@ -21,32 +21,25 @@ para exibir a relação de alunos existentes no banco de dados.
 
 Obs.: não se esqueça de criar também os links dinâmicos para
 as páginas de atualização e exclusão. -->
+  
+        
+            <?php foreach($lista_alunos as $alunos) { 
+                    $media = $alunos["media"];
+            ?>
+            <section>
+                <p>Nome: <?=$alunos["nome"]?> </h3>
+                <p>Nota um: <?=$alunos["nota_um"]?> </p>
+                <p>Nota dois: <?=$alunos["nota_dois"]?></p>
+                <p>Média: <?=$media?></p>
+                <?php
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Nota 1</th>
-                <th>Nota 2</th>
-                <th colspan="2"></th>
-            </tr>
-        </thead>
-        <tbody>
-
-        <?php foreach($lista_alunos as $alunos){?>
-            <tr>
-                <td><?=$alunos["nome"]?></td>                
-                <td><?=$alunos["nota_um"]?></td>                
-                <td><?=$alunos["nota_dois"]?></td> 
-                
-                <!-- LINK DINAMICO -->
-
-                <td><a href=""></a></td>
-                
-            </tr>
-        <?php } ?>
-        </tbody>
-    </table>
+                    if ($media >= 7) {
+                        echo  "<p>Situação: Aluno aprovado!</p>";    
+                    } else{
+                        echo  "<p>Situação: Aluno reprovado!</p>";  
+                    }
+                } ?>
+            </section>
 
 
     <p><a href="index.php">Voltar ao início</a></p>

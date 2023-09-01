@@ -1,3 +1,21 @@
+<?php
+require_once "src/funcao-alunos.php";
+
+$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+
+$alunos = lerAlunos($conexao,$id);
+
+if (isset($_POST['atualizar'])) {
+    $nome = filter_input(INPUT_POST,"nome", FILTER_SANITIZE_SPECIAL_CHARS);
+    $nota_um = filter_input(INPUT_POST,"nota_um", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $nota_dois = filter_input(INPUT_POST,"nota_dois", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+
+    atualizarAlunos($conexao, $id, $nome,$nota_um,$nota_dois);
+
+    header("location:visualizar.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,7 +56,7 @@
 	        <input type="text" name="situacao" id="situacao" readonly disabled>
         </p>
 	    
-        <button name="atualizar-dados">Atualizar dados do aluno</button>
+        <button type="submit" name="atualizar">Atualizar dados do aluno</button>
 	</form>    
     
     <hr>
