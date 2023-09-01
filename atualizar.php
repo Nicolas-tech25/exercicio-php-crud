@@ -1,9 +1,11 @@
 <?php
 require_once "src/funcao-alunos.php";
 
+// $lista_alunos = lerAlunos($conexao);
+
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
-$alunos = lerAlunos($conexao,$id);
+$alunos = lerUmAluno($conexao,$id);
 
 if (isset($_POST['atualizar'])) {
     $nome = filter_input(INPUT_POST,"nome", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -34,19 +36,19 @@ if (isset($_POST['atualizar'])) {
     <form action="#" method="post">
         
 	    <p><label for="nome">Nome:</label>
-	    <input type="text" name="nome" id="nome" required></p>
+	    <input  type="text" name="nome" id="nome" required></p>
         
         <p><label for="primeira">Primeira nota:</label>
-	    <input name="primeira" type="number" id="primeira" step="0.01" min="0.00" max="10.00" required></p>
+	    <input name="nota_um" type="number" id="primeira" step="0.01" min="0.00" max="10.00" required></p>
 	    
 	    <p><label for="segunda">Segunda nota:</label>
-	    <input name="segunda" type="number" id="segunda" step="0.01" min="0.00" max="10.00" required></p>
+	    <input name="nota_dois" type="number" id="segunda" step="0.01" min="0.00" max="10.00" required></p>
 
         <p>
         <!-- Campo somente leitura e desabilitado para edição.
         Usado apenas para exibição do valor da média -->
             <label for="media">Média:</label>
-            <input name="media" type="number" id="media" step="0.01" min="0.00" max="10.00" readonly disabled>
+            <input value="<?=$media?>" name="media" type="number" id="media" step="0.01" min="0.00" max="10.00" readonly disabled>
         </p>
 
         <p>

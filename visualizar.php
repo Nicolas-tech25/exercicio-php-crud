@@ -37,8 +37,9 @@ as páginas de atualização e exclusão. -->
                         echo  "<p>Situação: Aluno aprovado!</p>";    
                     } else{
                         echo  "<p>Situação: Aluno reprovado!</p>";  
-                    }
-                } ?>
+                    } ?>
+                    <p><a href="atualizar.php?id=<?=$alunos["id"]?>">EDITAR</a> | <a href="excluir.php?id=<?=$alunos["id"]?>">EXCLUIR</a></p>
+                <?php } ?>
             </section>
 
 
