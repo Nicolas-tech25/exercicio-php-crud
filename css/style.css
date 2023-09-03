@@ -16,3 +16,15 @@ a {
 h2 a { font-size: 0.9rem;}
 
 a:hover, a:focus { text-decoration: underline;}
+
+/* CSS da pagina visualizar (tabela) */
+td {border: 1px solid black;}
+td, th {text-align: center;}
+.aprovado{
+    background-color: green;
+    color: white;
+}
+.reprovado{
+    background-color: red;
+    color: white;
+}

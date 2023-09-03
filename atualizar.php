@@ -1,22 +1,20 @@
 <?php
 require_once "src/funcao-alunos.php";
 
-// $lista_alunos = lerAlunos($conexao);
+$idAluno = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
-$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+    $aluno = lerUmAluno($conexao, $idAluno);
 
-$alunos = lerUmAluno($conexao,$id);
+    
+        if (isset($_POST['atualizar'])) {
+            $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
+            $nota_um = filter_input(INPUT_POST, "nota_um", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $nota_dois = filter_input(INPUT_POST, "nota_dois", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-if (isset($_POST['atualizar'])) {
-    $nome = filter_input(INPUT_POST,"nome", FILTER_SANITIZE_SPECIAL_CHARS);
-    $nota_um = filter_input(INPUT_POST,"nota_um", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-    $nota_dois = filter_input(INPUT_POST,"nota_dois", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            atualizarAlunos($conexao, $nome, $nota_um, $nota_dois, $idAluno); 
 
-    atualizarAlunos($conexao, $id, $nome,$nota_um,$nota_dois);
-
-    header("location:visualizar.php");
-}
-
+            header("location: visualizar.php");
+        }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,19 +34,19 @@ if (isset($_POST['atualizar'])) {
     <form action="#" method="post">
         
 	    <p><label for="nome">Nome:</label>
-	    <input  type="text" name="nome" id="nome" required></p>
+	    <input  type="text" name="nome" id="nome" required value="<?=$aluno["nome"]?>"></p>
         
-        <p><label for="primeira">Primeira nota:</label>
-	    <input name="nota_um" type="number" id="primeira" step="0.01" min="0.00" max="10.00" required></p>
+        <p><label for="nota_um">Primeira nota:</label>
+	    <input name="nota_um" type="number" id="nota_um" step="0.01" min="0.00" max="10.00" required value="<?=$aluno["nota_um"]?>"></p>
 	    
-	    <p><label for="segunda">Segunda nota:</label>
-	    <input name="nota_dois" type="number" id="segunda" step="0.01" min="0.00" max="10.00" required></p>
+	    <p><label for="nota_dois">Segunda nota:</label>
+	    <input name="nota_dois" type="number" id="nota_dois" step="0.01" min="0.00" max="10.00" required value="<?=$aluno["nota_dois"]?>"></p>
 
         <p>
         <!-- Campo somente leitura e desabilitado para edição.
         Usado apenas para exibição do valor da média -->
             <label for="media">Média:</label>
-            <input value="<?=$media?>" name="media" type="number" id="media" step="0.01" min="0.00" max="10.00" readonly disabled>
+            <input  name="media" type="number" id="media" step="0.01" min="0.00" max="10.00" readonly disabled value="<?=$media?>">
         </p>
 
         <p>
@@ -58,7 +56,7 @@ if (isset($_POST['atualizar'])) {
 	        <input type="text" name="situacao" id="situacao" readonly disabled>
         </p>
 	    
-        <button type="submit" name="atualizar">Atualizar dados do aluno</button>
+        <button name="atualizar">Atualizar dados do aluno</button>
 	</form>    
     
     <hr>
