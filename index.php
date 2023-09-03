@@ -15,7 +15,6 @@
     <ul>
         <li><a href="visualizar.php">Visualizar Alunos</a></li>
         <li><a href="inserir.php">Inserir novo aluno</a></li>
-        <li><a href="tabela.php">tabela visualizar</a></li>
     </ul>
 </div>
 

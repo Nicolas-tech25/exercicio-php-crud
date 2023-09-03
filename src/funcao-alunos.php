@@ -13,12 +13,13 @@ function lerAlunos(PDO $conexao){
     }
     return $resultado;
 }
-function lerUmAluno(PDO $conexao, int $idAlunos):array {
+
+function lerUmAluno(PDO $conexao, int $id):array {
     $sql = "SELECT * FROM alunos WHERE id = :id";
 
     try {
         $consulta = $conexao->prepare($sql);
-        $consulta->bindValue(":id",$idAlunos, PDO::PARAM_INT); 
+        $consulta->bindValue(":id",$id, PDO::PARAM_INT); 
 
         $consulta->execute();
         $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
@@ -55,8 +56,8 @@ function atualizarAlunos(
     PDO $conexao, 
     string $nome, 
     float $nota_um,
-    float $nota_dois
-):void{
+    float $nota_dois,
+    int $id):void{
     $sql = "UPDATE alunos SET
     nome = :nome,
     nota_um = :nota_um,
@@ -68,7 +69,7 @@ function atualizarAlunos(
         $consulta->bindValue(":nome", $nome, PDO::PARAM_STR);
         $consulta->bindValue(":nota_um", $nota_um, PDO::PARAM_STR);
         $consulta->bindValue(":nota_dois", $nota_dois, PDO::PARAM_STR);
-        $consulta->bindValue(":id",$idAlunos,PDO::PARAM_INT);
+        $consulta->bindValue(":id",$id,PDO::PARAM_INT);
 
         $consulta->execute();
     } catch (Exception $erro) {
@@ -76,19 +77,15 @@ function atualizarAlunos(
     }
 }
 
-
-function excluirAlunos(PDO $conexao,$idAluno):void{
+function excluirAlunos(PDO $conexao,$id):void{
     $sql = "DELETE FROM alunos WHERE id = :id";
 
     try {
         $consulta = $conexao->prepare($sql);
-        $consulta->bindValue(":id",$idAluno,PDO::PARAM_INT);
+        $consulta->bindValue(":id",$id,PDO::PARAM_INT);
         $consulta->execute();
 
     } catch (Exception $erro) {
         die("Erro ao Apagar: ".$erro->getMessage());
     }
 }
-
-
-

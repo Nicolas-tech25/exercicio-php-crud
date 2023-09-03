@@ -1,9 +1,9 @@
 <?php
 require_once "src/funcao-alunos.php";
 
-$idAluno = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
-    $aluno = lerUmAluno($conexao, $idAluno);
+    $aluno = lerUmAluno($conexao, $id);
 
     
         if (isset($_POST['atualizar'])) {
@@ -11,7 +11,7 @@ $idAluno = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
             $nota_um = filter_input(INPUT_POST, "nota_um", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
             $nota_dois = filter_input(INPUT_POST, "nota_dois", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-            atualizarAlunos($conexao, $nome, $nota_um, $nota_dois, $idAluno); 
+            atualizarAlunos($conexao, $nome, $nota_um, $nota_dois, $id); 
 
             header("location: visualizar.php");
         }
