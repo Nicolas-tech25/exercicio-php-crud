@@ -65,5 +65,7 @@ $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 </div>
 
 
+
+<script src="js/atualiza-campos.js"></script>
 </body>
 </html>
